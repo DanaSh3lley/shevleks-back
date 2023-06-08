@@ -1,6 +1,5 @@
 const Review = require('../models/reviewModel');
 const factory = require('./handlerFactory');
-// const catchAsync = require('./../utils/catchAsync');
 
 exports.setProductUserIds = (req, res, next) => {
   if (!req.body.product) req.body.product = req.params.productId;

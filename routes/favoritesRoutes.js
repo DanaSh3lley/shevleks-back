@@ -1,7 +1,12 @@
 const express = require('express');
+
 const router = express.Router();
-const authController = require("../controllers/authController");
-const {addToFavorites, getUserFavorites, removeFromFavorites} = require("../controllers/favoritesController");
+const authController = require('../controllers/authController');
+const {
+  addToFavorites,
+  getUserFavorites,
+  removeFromFavorites,
+} = require('../controllers/favoritesController');
 
 router.use(authController.protect);
 
