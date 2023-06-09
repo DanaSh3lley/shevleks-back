@@ -48,8 +48,8 @@ exports.signup = catchAsync(async (req, res, next) => {
     message: `Доброго дня, ${newUser.name}`,
   });
 
-  const url = `${req.protocol}://${req.get('host')}/profile`;
-  await new Email(newUser, url).sendWelcome();
+  // const url = `${req.protocol}://${req.get('host')}/profile`;
+  // await new Email(newUser, url).sendWelcome();
   createSendToken(newUser, 201, req, res);
 });
 
