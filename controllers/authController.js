@@ -5,6 +5,7 @@ const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const Email = require('../utils/email');
+const Message = require('../models/messageModel');
 
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -41,11 +42,14 @@ exports.signup = catchAsync(async (req, res, next) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
+  await Message.create({
+    receiver: newUser._id,
+    sender: 'admin',
+    message: `Доброго дня, ${newUser.name}`,
+  });
 
-  const url = `${req.protocol}://${req.get('host')}/me`;
-
+  const url = `${req.protocol}://${req.get('host')}/profile`;
   await new Email(newUser, url).sendWelcome();
-
   createSendToken(newUser, 201, req, res);
 });
 

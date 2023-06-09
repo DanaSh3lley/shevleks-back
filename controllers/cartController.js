@@ -185,14 +185,14 @@ const checkout = async (req, res, next) => {
         payment_method: 'paypal',
       },
       redirect_urls: {
-        return_url: 'http://localhost:3001/',
-        cancel_url: 'http://localhost:3001/favorites',
+        return_url: 'http://localhost:3001/payment/success',
+        cancel_url: 'http://localhost:3001/payment/cancel',
       },
       transactions: [
         {
           amount: {
             total: totalAmount,
-            currency: 'USD',
+            currency: 'UAH',
           },
           description: 'Payment for your product or service',
         },
