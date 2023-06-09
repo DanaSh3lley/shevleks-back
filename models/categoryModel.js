@@ -13,10 +13,6 @@ const categorySchema = new Schema({
       required: [false, 'Please provide the Ukrainian category name'],
     },
   },
-  image: {
-    type: String,
-    required: true,
-  },
 });
 
 const Category = mongoose.model('Category', categorySchema);
