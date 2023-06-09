@@ -35,22 +35,21 @@ const createSendToken = (user, statusCode, req, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
-  const newUser = await User.create({
-    name: req.body.name,
-    email: req.body.email,
-    phone: req.body.phone,
-    password: req.body.password,
-    passwordConfirm: req.body.passwordConfirm,
-  });
-  await Message.create({
-    receiver: newUser._id,
-    sender: 'admin',
-    message: `Доброго дня, ${newUser.name}`,
-  });
-
+  // const newUser = await User.create({
+  //   name: req.body.name,
+  //   email: req.body.email,
+  //   phone: req.body.phone,
+  //   password: req.body.password,
+  //   passwordConfirm: req.body.passwordConfirm,
+  // });
+  // await Message.create({
+  //   receiver: newUser._id,
+  //   sender: 'admin',
+  //   message: `Доброго дня, ${newUser.name}`,
+  // });
   // const url = `${req.protocol}://${req.get('host')}/profile`;
   // await new Email(newUser, url).sendWelcome();
-  createSendToken(newUser, 201, req, res);
+  // createSendToken(newUser, 201, req, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
