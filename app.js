@@ -61,14 +61,7 @@ app.use(xss());
 
 app.use(
   hpp({
-    whitelist: [
-      'duration',
-      'ratingsQuantity',
-      'ratingsAverage',
-      'maxGroupSize',
-      'difficulty',
-      'price',
-    ],
+    whitelist: ['price', 'favorites', 'cart', 'volume', 'name', 'messages'],
   })
 );
 
