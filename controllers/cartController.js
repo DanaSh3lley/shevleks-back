@@ -201,6 +201,7 @@ const checkout = async (req, res, next) => {
 
     paypal.payment.create(createPaymentJson, async (error, payment) => {
       if (error) {
+        console.log(error);
         return res
           .status(500)
           .json({ error: 'Failed to create PayPal payment.' });
@@ -238,6 +239,7 @@ const checkout = async (req, res, next) => {
       }
     });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
