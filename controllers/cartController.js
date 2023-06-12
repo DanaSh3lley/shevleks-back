@@ -192,7 +192,7 @@ const checkout = async (req, res, next) => {
         {
           amount: {
             total: totalAmount,
-            currency: 'UAH',
+            currency: 'EUR',
           },
           description: 'Payment for your product or service',
         },

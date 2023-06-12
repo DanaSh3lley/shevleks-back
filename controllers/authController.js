@@ -5,6 +5,7 @@ const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const Email = require('../utils/email');
+const Message = require('../models/messageModel');
 
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -49,23 +50,24 @@ exports.signup = catchAsync(async (req, res, next) => {
   createSendToken(newUser, 201, req, res);
 });
 
-// exports.signup = catchAsync(async (req, res, next) => {
-//   const newUser = await User.create({
-//     name: req.body.name,
-//     email: req.body.email,
-//     phone: req.body.phone,
-//     password: req.body.password,
-//     passwordConfirm: req.body.passwordConfirm,
-//   });
-//   // await Message.create({
-//   //   receiver: newUser._id,
-//   //   sender: 'admin',
-//   //   message: `Доброго дня, ${newUser.name}`,
-//   // });
-//   // const url = `${req.protocol}://${req.get('host')}/profile`;
-//   // await new Email(newUser, url).sendWelcome();
-//   createSendToken(newUser, 201, req, res);
-// });
+exports.signup = catchAsync(async (req, res, next) => {
+  const newUser = await User.create({
+    name: req.body.name,
+    email: req.body.email,
+    phone: req.body.phone,
+    city: req.body.city,
+    password: req.body.password,
+    passwordConfirm: req.body.passwordConfirm,
+  });
+  await Message.create({
+    receiver: newUser._id,
+    sender: 'admin',
+    message: `Доброго дня, ${newUser.name}`,
+  });
+  const url = `${req.protocol}://${req.get('host')}/profile`;
+  await new Email(newUser, url).sendWelcome();
+  createSendToken(newUser, 201, req, res);
+});
 
 exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
